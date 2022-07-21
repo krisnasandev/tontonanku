@@ -1,5 +1,5 @@
 {
-  "name": "awesometsproject21072022",
+  "name": "tontonanku",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -11,7 +11,25 @@
   },
   "dependencies": {
     "react": "18.0.0",
-    "react-native": "0.69.2"
+    "react-native": "0.69.2",
+    "@react-native-async-storage/async-storage": "^1.17.7",
+    "@react-navigation/drawer": "^6.4.3",
+    "@react-navigation/native": "^6.0.11",
+    "@react-navigation/native-stack": "^6.7.0",
+    "axios": "^0.27.2",
+    "i18next": "^21.8.14",
+    "moment": "^2.29.4",
+    "react-i18next": "^11.18.1",
+    "react-native-bootsplash": "^4.2.3",
+    "react-native-gesture-handler": "^2.5.0",
+    "react-native-global-font": "^1.0.3",
+    "react-native-modalize": "^2.0.13",
+    "react-native-reanimated": "^2.9.1",
+    "react-native-safe-area-context": "^4.3.1",
+    "react-native-screens": "^3.15.0",
+    "react-native-toast-message": "^2.1.5",
+    "react-redux": "^8.0.2",
+    "redux": "^4.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
@@ -28,7 +46,8 @@
     "jest": "^26.6.3",
     "metro-react-native-babel-preset": "^0.70.3",
     "react-test-renderer": "18.0.0",
-    "typescript": "^4.4.4"
+    "typescript": "^4.4.4",
+    "babel-plugin-module-resolver": "^4.1.0"
   },
   "jest": {
     "preset": "react-native",
