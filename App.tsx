@@ -8,13 +8,19 @@ import {
   DrawerItemList,
   DrawerItem,
 } from '@react-navigation/drawer';
+import i18n from 'src/i18n';
+import GlobalFont from 'react-native-global-font';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import config from 'src/configs';
+import {useTranslation} from 'react-i18next';
 
 function Feed({navigation}) {
+  const {t} = useTranslation();
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text>Feed Screen</Text>
-      <Button title="Open drawer" onPress={() => navigation.openDrawer()} />
-      <Button title="Toggle drawer" onPress={() => navigation.toggleDrawer()} />
+      <Text>{t('name')}</Text>
+      <Button title="English" onPress={() => i18n.changeLanguage('en')} />
+      <Button title="Indonesia" onPress={() => i18n.changeLanguage('id')} />
     </View>
   );
 }
@@ -55,11 +61,14 @@ function MyDrawer() {
     </Drawer.Navigator>
   );
 }
-
+export const init_i18n = i18n;
 export default function App() {
+  GlobalFont.applyGlobal(config.fontFamily);
   return (
-    <NavigationContainer onReady={() => RNBootSplash.hide()}>
-      <MyDrawer />
-    </NavigationContainer>
+    <GestureHandlerRootView style={{flex: 1}}>
+      <NavigationContainer onReady={() => RNBootSplash.hide()}>
+        <MyDrawer />
+      </NavigationContainer>
+    </GestureHandlerRootView>
   );
 }
