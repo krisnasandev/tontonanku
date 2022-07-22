@@ -57,7 +57,7 @@ export const Header = (props: HeaderProps) => {
           )}
           {props.headerButtonLeft as any}
 
-          {props.title && (
+          {props.title && !props.titleContent && (
             <Label
               color={props.tintColor}
               size={14}
@@ -69,6 +69,7 @@ export const Header = (props: HeaderProps) => {
               {props.title}
             </Label>
           )}
+          {props.titleContent && <>{props.titleContent}</>}
           {props.headerButtonRight && (
             <View>
               <>{props.headerButtonRight}</>

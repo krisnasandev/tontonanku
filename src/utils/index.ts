@@ -75,7 +75,7 @@ export function deleteNegativeValueInObject(value: object): object {
   });
   return p;
 }
-export const setupAxios = store => {
+export const setupAxios = () => {
   axios.interceptors.request.use(
     async (conf: any = {}) => {
       if (conf.url.includes(config.api_url_prod)) {
@@ -167,4 +167,13 @@ export function getStorage(key: string, parse = false): Promise<any> {
       resolve(null);
     }
   });
+}
+export function debounce(func: (value: any) => void, timeout = 300) {
+  let timer;
+  return (...args) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      func.apply(this, args);
+    }, timeout);
+  };
 }

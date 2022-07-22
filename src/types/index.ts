@@ -105,6 +105,7 @@ export type LayoutProps = {
 
 export interface HeaderProps {
   title?: string;
+  titleContent?: React.ReactNode | React.ReactNode[] | Element | Element[];
   hideBackButton?: boolean;
   headerButtonRight?: React.ReactNode | React.ReactNode[] | Element | Element[];
   headerButtonLeft?: React.ReactNode | React.ReactNode[] | Element | Element[];
@@ -149,6 +150,7 @@ export interface FlatListServerSideProps<ItemT> extends FlatListProps<ItemT> {
 }
 
 export interface MovieModel {
+  media_type: string;
   known_for: any;
   adult: boolean;
   backdrop_path: string;

@@ -13,7 +13,7 @@ import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {store} from 'src/redux/stores';
 import Toast from 'react-native-toast-message';
 export const init_i18n = i18n;
-setupAxios({});
+setupAxios();
 LogBox.ignoreLogs([
   'Task orphaned for request',
   'Require cycle',
@@ -21,7 +21,7 @@ LogBox.ignoreLogs([
 ]);
 
 const toastConfig = {
-  success: ({text1, text2, props}) => (
+  success: ({text1}) => (
     <View padding={20} style={{width: '100%'}}>
       <View
         padding={15}
@@ -41,7 +41,7 @@ const toastConfig = {
       </View>
     </View>
   ),
-  error: ({text1, text2, props}) => (
+  error: ({text1}) => (
     <View padding={20} style={{width: '100%'}}>
       <View
         padding={15}

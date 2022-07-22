@@ -7,7 +7,7 @@ import {
 } from '@react-navigation/drawer';
 import {useEffect} from 'react';
 import RNBootSplash from 'react-native-bootsplash';
-import {Home, DetailList, WatchList} from 'src/screens';
+import {Home, DetailList, WatchList, Search} from 'src/screens';
 import config from 'src/configs';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {useTranslation} from 'react-i18next';
@@ -119,6 +119,7 @@ function Root() {
       }}>
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="DetailList" component={DetailList} />
+      <Stack.Screen name="Search" component={Search} />
     </Stack.Navigator>
   );
 }

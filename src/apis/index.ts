@@ -7,6 +7,7 @@ export const base_url = api_url + api_version + '/';
 const base_movie = base_url + 'movie/';
 const base_person = base_url + 'person/';
 const base_tv = base_url + 'tv/';
+const base_search = base_url + 'search/';
 
 interface ApiProps {
   params?: {[Key: string]: any};
@@ -21,7 +22,7 @@ const apiConfig = props => {
     cancelToken: props.cancelToken,
   };
 };
-export function fakeApiFunction(props: ApiGetProps) {
+export function fakeApiFunction(_: ApiGetProps) {
   console.log('fakeApiFunction');
   return fakePromise(3000, false, {data: {results: []}});
 }
@@ -59,6 +60,11 @@ export function getTvPopularApi(props: ApiGetProps) {
 
 export function getTvOnTheAirApi(props: ApiGetProps) {
   return apiGet(`${base_tv}on_the_air`, apiConfig(props));
+}
+
+export function getSearchMultiApi(props: ApiGetProps) {
+  console.log('props', JSON.stringify(props, null, 3));
+  return apiGet(`${base_search}multi`, apiConfig(props));
 }
 export function getDetailListApi(page: string) {
   let apiFunction;

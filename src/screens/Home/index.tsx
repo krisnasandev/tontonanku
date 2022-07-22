@@ -61,22 +61,40 @@ export const Home = ({navigation}) => {
           </TouchableOpacity>
         ),
         headerButtonRight: (
-          <TouchableOpacity
-            onPress={() => {
-              navigation.navigate('WatchList');
-            }}
-            style={{
-              height: 45,
-              width: 45,
-              justifyContent: 'center',
-              // backgroundColor: 'blue',
-              alignItems: 'center',
-            }}>
-            <RNImage
-              source={require('src/assets/images/SF_bookmark-3.png')}
-              style={{height: 18, width: 18}}
-            />
-          </TouchableOpacity>
+          <View flexDirection={'row'}>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('WatchList');
+              }}
+              style={{
+                height: 45,
+                width: 45,
+                justifyContent: 'center',
+                // backgroundColor: 'blue',
+                alignItems: 'center',
+              }}>
+              <RNImage
+                source={require('src/assets/images/SF_bookmark-3.png')}
+                style={{height: 18, width: 18}}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('Search');
+              }}
+              style={{
+                height: 45,
+                width: 45,
+                justifyContent: 'center',
+                // backgroundColor: 'blue',
+                alignItems: 'center',
+              }}>
+              <RNImage
+                source={require('src/assets/images/SF_magnifyingglass_circle_fill.png')}
+                style={{height: 18, width: 18}}
+              />
+            </TouchableOpacity>
+          </View>
         ),
       }}>
       <RNScrollView {...scrollViewProps}>

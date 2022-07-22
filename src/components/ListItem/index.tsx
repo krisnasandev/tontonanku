@@ -25,7 +25,7 @@ export const ListItem = (props: {
         <View marginRight={10}>
           <View borderRadius={10} overflow={'hidden'}>
             <Image
-              source={{uri: tmdbImage(item.poster_path)}}
+              source={{uri: tmdbImage(item.poster_path || item.profile_path)}}
               resizeMode={'cover'}
               style={{
                 width: '100%',
