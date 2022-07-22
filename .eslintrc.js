@@ -11,6 +11,9 @@ module.exports = {
         'no-shadow': 'off',
         'no-undef': 'off',
       },
+      globals: {
+        __DEV__: true,
+      },
     },
   ],
 };
