@@ -15,7 +15,7 @@
 </div>
 
 ## Android APK
-<a href="./apk/app-release.apk">Download here.</a>
+<a href="https://drive.google.com/file/d/18xZy92grUPB9cQcZ-H4POfgIevF6Se6m/view?usp=sharing">Download here.</a>
 
 ## Prerequisites
 
