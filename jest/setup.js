@@ -1,7 +1,6 @@
 /* eslint-disable no-undef */
 import 'react-native-gesture-handler/jestSetup';
-require('react-native-reanimated/lib/reanimated2/jestUtils').setUpTests();
-//
+
 jest.mock('react-native-reanimated', () => {
   const Reanimated = require('react-native-reanimated/mock');
 
@@ -48,16 +47,7 @@ jest.mock('@react-navigation/native', () => {
     }),
   };
 });
-jest.mock('react-native-bootsplash', () => {
-  return {
-    hide: jest.fn().mockResolvedValueOnce(),
-    getVisibilityStatus: jest.fn().mockResolvedValue('hidden'),
-  };
-});
-// jest.doMock('react-native/Libraries/Utilities/Platform', () => ({
-//   OS: 'ios',
-//   select: config => config.android,
-// }));
-// jest.mock('react-native', () => ({
-//   Platform: {}
-// }));
+jest.mock('react-native-toast-message', () => ({
+  show: jest.fn(),
+  hide: jest.fn(),
+}));

@@ -5,6 +5,7 @@
   "scripts": {
     "android": "react-native run-android",
     "build-apk": "cd android && ./gradlew assembleRelease",
+    "install-apk": "adb install android/app/build/outputs/apk/release/app-release.apk",
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
@@ -57,7 +58,7 @@
       "<rootDir>/jest/setup.js"
     ],
     "transformIgnorePatterns": [
-      "node_modules/(?!((jest-)?react-native|react-native-elements|@react-native(-community)?)/)"
+      "node_modules/(?!(jest-)?react-native|react-clone-referenced-element|@react-native-community|rollbar-react-native|@fortawesome|@react-native|@react-navigation|react-native-toast-message|react-redux)"
     ],
     "moduleFileExtensions": [
       "ts",

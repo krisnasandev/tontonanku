@@ -78,8 +78,8 @@ const App = () => {
         <PersistGate loading={<ActivityIndicator />} persistor={persistor}>
           <SafeAreaProvider>
             <Navigators />
-            <ModalMovie />
             <ModalPerson />
+            <ModalMovie />
             {/*@ts-ignore*/}
             <Toast config={toastConfig} />
           </SafeAreaProvider>
