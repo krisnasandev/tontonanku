@@ -1,13 +1,13 @@
 import * as React from 'react';
 import {Layout, EmptyPlaceholderView, ListItem} from 'src/components';
 import {useTranslation} from 'react-i18next';
-import {useApp} from 'src/contexts';
 import {FlatList} from 'react-native';
 import {screenWidth} from 'src/utils';
 import {useState} from 'react';
 import {MovieModel} from 'src/types';
+import {useSelector} from 'react-redux';
 export const WatchList = () => {
-  const {watchList} = useApp();
+  const watchList = useSelector((state: any) => state.watch_list);
   const {t} = useTranslation();
   const [heightItem, setHeightItem] = useState(screenWidth() / 1.8);
 

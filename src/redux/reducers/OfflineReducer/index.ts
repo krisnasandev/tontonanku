@@ -1,13 +1,11 @@
 import {OFFLINE_ADD} from 'src/redux/types';
 
-export function OfflineReducer(state = {offline: {}}, action) {
+export function OfflineReducer(state = {}, action) {
   switch (action.type) {
     case OFFLINE_ADD:
       return {
-        offline: {
-          ...state.offline,
-          ...action.payload,
-        },
+        ...state,
+        ...action.payload,
       };
     default:
       return state;

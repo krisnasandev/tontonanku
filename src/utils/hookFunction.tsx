@@ -3,16 +3,11 @@ import {FetchProps, HookScrollViewProps} from 'src/types';
 import {useCallback, useEffect, useRef, useState} from 'react';
 import axios, {AxiosResponse} from 'axios';
 import {ApiGetProps} from 'src/apis';
-import {
-  errorMessage,
-  getStorage,
-  setRefreshControlProps,
-  showToast,
-} from './index';
+import {errorMessage, setRefreshControlProps, showToast} from './index';
 import {RefreshControl, ScrollViewProps} from 'react-native';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {OfflineAction} from 'src/redux/actions';
-export * from 'src/contexts';
+import {ReduxState} from 'src/redux/stores';
 let fetchData = {};
 const getInitialFetchDataList = (props: any): any[] => {
   // @ts-ignore
@@ -25,6 +20,7 @@ const getInitialFetchDataList = (props: any): any[] => {
   return list;
 };
 export function useFetch<P>(props: FetchProps<P>) {
+  const {offline} = useSelector((state: ReduxState) => state);
   const dispatch = useDispatch();
   const [totalData, setTotalData] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
@@ -65,20 +61,17 @@ export function useFetch<P>(props: FetchProps<P>) {
           }
           resolve(responseApi);
         } catch (e) {
-          console.log('e nih', e.message);
           if (axios.isCancel(e)) {
             console.log('Request canceled =>', e.message);
             return;
           }
 
-          if (e.message === 'Network Error' && props.offlineIdentifier) {
-            getStorage('offline', true)
-              .then(value => {
-                if (value) {
-                  setResponse(value[props.offlineIdentifier]);
-                }
-              })
-              .catch(() => {});
+          if (
+            e.message === 'Network Error' &&
+            props.offlineIdentifier &&
+            offline
+          ) {
+            setResponse(offline[props.offlineIdentifier]);
           }
           // console.log('e_getData', JSON.stringify(e.response, null, 3));
           const {config, data, status, headers} = e.response || {};
@@ -100,7 +93,7 @@ export function useFetch<P>(props: FetchProps<P>) {
             ),
           );
 
-          const text1 = `Error ${status || ''}`;
+          // const text1 = `Error ${status || ''}`;
           // @ts-ignore
           setError(e);
           setIsError(true);
@@ -142,8 +135,12 @@ export function useFetch<P>(props: FetchProps<P>) {
       setTotalData(response?.data?.pagination?.total || 0);
       setList(rawDataList);
     }
-    // eslint-disable-next-line
-  }, [props.listValueAndLabel?.labelKey1, props.listValueAndLabel?.labelKey2, props.listValueAndLabel?.valueKey, response])
+  }, [
+    props.listValueAndLabel?.labelKey1,
+    props.listValueAndLabel?.labelKey2,
+    props.listValueAndLabel?.valueKey,
+    response,
+  ]);
 
   const filterListData = (data: any = {}) => {
     return list.filter(el => {

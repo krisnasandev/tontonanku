@@ -3,7 +3,7 @@ import {Label, Layout, RNImage, RNScrollView, View} from 'src/components';
 import {TouchableOpacity} from 'react-native';
 import {useTranslation} from 'react-i18next';
 import moment from 'moment';
-import {fakePromise, randomString, useApp, useScrollView} from 'src/utils';
+import {fakePromise, randomString, useScrollView} from 'src/utils';
 import {
   getMoviePopularApi,
   getMovieTopRatedApi,
@@ -22,10 +22,12 @@ import {
   SegmentCard2,
 } from 'src/screens/Home/components';
 import {useState} from 'react';
-
+import {useDispatch} from 'react-redux';
+import {openModalMovie, openModalPerson} from 'src/redux/actions';
 export const Home = ({navigation}) => {
+  const dispatch = useDispatch();
   const [flagRefresh, setFlagRefresh] = useState(randomString());
-  const {onOpenMovieItemModal, onOpenPersonItemModal} = useApp();
+
   const {t} = useTranslation();
   const {setIsRefreshing, scrollViewProps} = useScrollView({
     scrollViewProps: {
@@ -39,6 +41,7 @@ export const Home = ({navigation}) => {
       // onRefreshing();
     },
   });
+
   return (
     <Layout
       showHeader
@@ -81,6 +84,7 @@ export const Home = ({navigation}) => {
             <TouchableOpacity
               onPress={() => {
                 navigation.navigate('Search');
+                // dispatch(LanguageAction('id'));
               }}
               style={{
                 height: 45,
@@ -113,7 +117,7 @@ export const Home = ({navigation}) => {
           title={t('movie_now_playing')}
           apiFunction={getNowPlayingApi}
           onTapItem={item => {
-            onOpenMovieItemModal(item);
+            dispatch(openModalMovie(item));
           }}
           onTapViewMore={() => {
             navigation.navigate('DetailList', {
@@ -130,7 +134,7 @@ export const Home = ({navigation}) => {
           subtitle={t('top')}
           apiFunction={getMovieTopRatedApi}
           onTapItem={item => {
-            onOpenMovieItemModal(item);
+            dispatch(openModalMovie(item));
           }}
           onTapViewMore={() => {
             navigation.navigate('DetailList', {
@@ -148,7 +152,7 @@ export const Home = ({navigation}) => {
           subtitle={t('top')}
           apiFunction={getMoviePopularApi}
           onTapItem={item => {
-            onOpenMovieItemModal(item);
+            dispatch(openModalMovie(item));
           }}
           onTapViewMore={() => {
             navigation.navigate('DetailList', {
@@ -166,7 +170,7 @@ export const Home = ({navigation}) => {
           subtitle={t('top')}
           apiFunction={getMovieUpcomingApi}
           onTapItem={item => {
-            onOpenMovieItemModal(item);
+            dispatch(openModalMovie(item));
           }}
           onTapViewMore={() => {
             navigation.navigate('DetailList', {
@@ -183,7 +187,7 @@ export const Home = ({navigation}) => {
           title={t('tv_aring_today')}
           apiFunction={getTvAiringTodayApi}
           onTapItem={item => {
-            onOpenMovieItemModal(item);
+            dispatch(openModalMovie(item));
           }}
           onTapViewMore={() => {
             navigation.navigate('DetailList', {
@@ -201,7 +205,7 @@ export const Home = ({navigation}) => {
           subtitle={t('top')}
           apiFunction={getTvOnTheAirApi}
           onTapItem={item => {
-            onOpenMovieItemModal(item);
+            dispatch(openModalMovie(item));
           }}
           onTapViewMore={() => {
             navigation.navigate('DetailList', {
@@ -219,7 +223,7 @@ export const Home = ({navigation}) => {
           subtitle={t('top')}
           apiFunction={getTvTopRatedApi}
           onTapItem={item => {
-            onOpenMovieItemModal(item);
+            dispatch(openModalMovie(item));
           }}
           onTapViewMore={() => {
             navigation.navigate('DetailList', {
@@ -237,7 +241,7 @@ export const Home = ({navigation}) => {
           subtitle={t('top')}
           apiFunction={getTvPopularApi}
           onTapItem={item => {
-            onOpenMovieItemModal(item);
+            dispatch(openModalMovie(item));
           }}
           onTapViewMore={() => {
             navigation.navigate('DetailList', {
@@ -253,7 +257,7 @@ export const Home = ({navigation}) => {
           offlineIdentifier={'popular_person'}
           title={t('popular_person')}
           onTapItem={item => {
-            onOpenPersonItemModal(item);
+            dispatch(openModalPerson(item));
           }}
           onTapViewMore={() => {
             navigation.navigate('DetailList', {

@@ -1,6 +1,6 @@
 const api_prod = 'https://api.themoviedb.org/';
 const config = {
-  appName: 'MovieDB',
+  appName: 'TontonanKu',
   fontFamily: 'Poppins-Regular',
   pageSize: 20,
   api_url_prod: api_prod,

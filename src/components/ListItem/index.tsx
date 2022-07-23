@@ -2,14 +2,16 @@ import * as React from 'react';
 import {MovieModel} from 'src/types';
 import {View, Image, RNImage, Label} from 'src/components';
 import {TouchableOpacity} from 'react-native';
-import {tmdbImage, useApp} from 'src/utils';
+import {tmdbImage} from 'src/utils';
+import {openModalMovie, openModalPerson} from 'src/redux/actions';
+import {useDispatch} from 'react-redux';
 
 export const ListItem = (props: {
   isPerson: boolean;
   item: MovieModel;
   heightItem: number;
 }) => {
-  const {onOpenMovieItemModal, onOpenPersonItemModal} = useApp();
+  const dispatch = useDispatch();
   const {item, heightItem, isPerson} = props;
   return (
     <View flex={1} flexDirection={'column'}>
@@ -17,9 +19,9 @@ export const ListItem = (props: {
         key={item.id}
         onPress={() => {
           if (isPerson) {
-            onOpenPersonItemModal(item as any);
+            dispatch(openModalPerson(item));
           } else {
-            onOpenMovieItemModal(item);
+            dispatch(openModalMovie(item));
           }
         }}>
         <View marginRight={10}>

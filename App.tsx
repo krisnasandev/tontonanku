@@ -2,16 +2,16 @@ import React from 'react';
 import Navigators from 'src/navigators';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import i18n from 'src/i18n';
-import {setStorage, setupAxios} from 'src/utils';
+import {setupAxios} from 'src/utils';
 import config from 'src/configs';
 import GlobalFont from 'react-native-global-font';
-import {LogBox} from 'react-native';
-import {Label, RNImage, View} from 'src/components';
-import {AppContextProvider} from 'src/contexts';
+import {ActivityIndicator, LogBox} from 'react-native';
+import {Label, RNImage, View, ModalPerson, ModalMovie} from 'src/components';
 import {Provider as ProviderRedux} from 'react-redux';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
-import {store} from 'src/redux/stores';
 import Toast from 'react-native-toast-message';
+import {PersistGate} from 'redux-persist/integration/react';
+import stores from 'src/redux/stores';
 export const init_i18n = i18n;
 setupAxios();
 LogBox.ignoreLogs([
@@ -63,24 +63,28 @@ const toastConfig = {
 const App = () => {
   GlobalFont.applyGlobal(config.fontFamily);
 
-  store.subscribe(() => {
-    if (Object.keys(store.getState()).includes('offline')) {
-      setStorage('offline', JSON.stringify(store.getState().offline))
-        .then(() => {})
-        .catch(() => {});
-    }
-  });
+  const {store, persistor} = stores();
+  // store.subscribe(() => {
+  //   if (Object.keys(store.getState()).includes('offline')) {
+  //     // setStorage('offline', JSON.stringify(store.getState().offline))
+  //     //   .then(() => {})
+  //     //   .catch(() => {});
+  //   }
+  // });
+
   return (
     <GestureHandlerRootView style={{flex: 1}}>
-      <AppContextProvider>
-        <ProviderRedux store={store}>
+      <ProviderRedux store={store}>
+        <PersistGate loading={<ActivityIndicator />} persistor={persistor}>
           <SafeAreaProvider>
             <Navigators />
+            <ModalMovie />
+            <ModalPerson />
             {/*@ts-ignore*/}
             <Toast config={toastConfig} />
           </SafeAreaProvider>
-        </ProviderRedux>
-      </AppContextProvider>
+        </PersistGate>
+      </ProviderRedux>
     </GestureHandlerRootView>
   );
 };

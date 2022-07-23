@@ -12,11 +12,15 @@ import config from 'src/configs';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {useTranslation} from 'react-i18next';
 import {Colors, Label, RNImage, View} from 'src/components';
-import {fakePromise, useApp} from 'src/utils';
+import {fakePromise} from 'src/utils';
+import {useDispatch, useSelector} from 'react-redux';
+import {LanguageAction} from 'src/redux/actions';
+import {ReduxState} from 'src/redux/stores';
+import i18n from 'src/i18n';
 
 function CustomDrawerContent(props) {
+  const dispatch = useDispatch();
   const {t} = useTranslation();
-  const {setLang} = useApp();
   const menus = [
     'movie_now_playing',
     'movie_top_rated',
@@ -29,7 +33,7 @@ function CustomDrawerContent(props) {
     'tv_popular',
   ];
   const setLanguage = (value: string) => {
-    setLang(value);
+    dispatch(LanguageAction(value));
     props.navigation.dispatch(DrawerActions.closeDrawer());
   };
   return (
@@ -144,6 +148,7 @@ function MyDrawer() {
 }
 
 export default function Navigators() {
+  const language = useSelector((state: ReduxState) => state.language);
   useEffect(() => {
     const init = async () => {
       await fakePromise(1000);
@@ -151,9 +156,13 @@ export default function Navigators() {
 
     init().finally(async () => {
       await RNBootSplash.hide({fade: true});
-      console.log('Bootsplash has been hidden successfully');
     });
   }, []);
+
+  useEffect(() => {
+    i18n.changeLanguage(language);
+  }, [language]);
+
   return (
     <NavigationContainer>
       <MyDrawer />

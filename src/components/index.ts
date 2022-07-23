@@ -10,3 +10,5 @@ export * from './EmptyPlaceholderView';
 export * from './Header';
 export * from './ListItem';
 export * from './Colors';
+export * from './ModalMovie';
+export * from './ModalPerson';
